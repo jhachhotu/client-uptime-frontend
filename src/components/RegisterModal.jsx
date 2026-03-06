@@ -148,6 +148,7 @@ const RegisterModal = ({ isOpen, onClose, onLoginClick }) => {
                         <GoogleLogin
                             onSuccess={handleGoogleSuccess}
                             onError={() => setError('Google Sign-In was unsuccessful.')}
+                            use_fedcm_for_prompt={false}
                             useOneTap
                         />
                     </div>
