@@ -1,60 +1,76 @@
 # 🖥️ Sentinel – Uptime Monitoring Frontend
 
-A modern, responsive, and high-performance frontend for the **Sentinel Uptime Monitoring Platform**, built with **React**, **Vite**, and **Tailwind CSS**. The application provides an intuitive interface for monitoring websites, APIs, SSL certificates, DNS records, ports, and infrastructure health through a clean and interactive dashboard.
+A modern, responsive, and high-performance frontend for the **Sentinel Uptime Monitoring Platform**, built with **React**, **Vite**, and **Tailwind CSS**. Sentinel provides a clean and intuitive interface for monitoring websites, APIs, SSL certificates, DNS records, ports, and infrastructure health from a single dashboard.
 
 🌐 **Live Demo:** https://client-uptime-frontend.vercel.app/
 
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-Sentinel is a modern infrastructure monitoring platform designed to help developers and organizations monitor the health and availability of their services in real time.
+**Sentinel** is a cloud-ready infrastructure monitoring platform that enables developers and organizations to monitor the health and availability of their services in real time.
 
-The frontend communicates with a **Spring Boot Microservices Backend** secured with **OAuth2** and **JWT Authentication**, delivering a fast, scalable, and responsive user experience.
-
----
-
-## ✨ Features
-
-- 🚀 Modern Landing Page
-- 🔐 Secure Authentication (OAuth2 & JWT)
-- 📊 Interactive Monitoring Dashboard
-- 🌐 Website & API Monitoring
-- 🔒 SSL Certificate Monitoring
-- 🌍 DNS Monitoring
-- 🔌 Port Monitoring
-- 📈 Real-time Status Updates
-- 📱 Fully Responsive UI
-- ⚡ Lightning Fast Performance with Vite
-- 🎨 Modern UI with Tailwind CSS
-- 🌙 Clean Dark Theme
-- 🔄 REST API Integration
-- ☁️ Cloud Deployment Ready
+The frontend is built with **React + Vite** for blazing-fast performance and **Tailwind CSS** for a modern UI. It seamlessly integrates with a secure **Spring Boot Microservices** backend powered by **OAuth2**, **JWT Authentication**, **Spring Cloud Gateway**, **Eureka Service Discovery**, and **Config Server**.
 
 ---
 
 # 📸 Screenshots
 
-## Landing Page
+## 🏠 Landing Page
 
-> Replace the path below with your actual screenshot after uploading it to your repository.
+![Sentinel Landing Page](./src/assets/images/homepage.png)
 
-```markdown
-![Landing Page](./public/screenshots/homepage.png)
-```
+> Modern landing page featuring real-time infrastructure monitoring, API health checks, SSL certificate monitoring, DNS monitoring, and secure authentication.
+
+---
+
+# ✨ Features
+
+- 🚀 Modern & Responsive Landing Page
+- 🔐 Google OAuth2 Authentication
+- 🛡️ JWT Secure Authentication
+- 📊 Interactive Monitoring Dashboard
+- 🌐 Website Uptime Monitoring
+- ⚡ REST API Monitoring
+- 🔒 SSL Certificate Monitoring
+- 🌍 DNS Monitoring
+- 🔌 Port Monitoring
+- 📈 Response Time Analytics
+- 📉 Uptime Statistics
+- 📱 Fully Responsive Design
+- 🎨 Beautiful UI with Tailwind CSS
+- ⚡ Fast Performance with Vite
+- 🔄 REST API Integration
+- 🌙 Dark Theme
+- ☁️ Cloud Deployment Ready
+
+---
+
+# 🚀 Highlights
+
+- ⚡ Real-time monitoring with 10-second health checks
+- 🌐 Website & REST API monitoring
+- 🔒 SSL certificate expiration tracking
+- 🌍 DNS monitoring
+- 🔌 Port availability monitoring
+- 📊 Modern analytics dashboard
+- 🔐 Google OAuth2 Authentication
+- 📱 Mobile-first responsive design
+- 🌙 Beautiful dark interface
+- ☁️ Hosted on Vercel
 
 ---
 
 # 🛠️ Tech Stack
 
 | Category | Technology |
-|----------|------------|
+|------------|------------|
 | Framework | React 19 |
 | Build Tool | Vite |
 | Styling | Tailwind CSS |
 | Routing | React Router DOM |
 | HTTP Client | Axios |
-| Authentication | Google OAuth + JWT |
+| Authentication | Google OAuth2 + JWT |
 | Icons | Lucide React |
 | Linting | ESLint |
 | Deployment | Vercel |
@@ -63,22 +79,24 @@ The frontend communicates with a **Spring Boot Microservices Backend** secured w
 
 # 📂 Project Structure
 
-```
+```text
 client-uptime-frontend/
 
-│
 ├── public/
 │
 ├── src/
 │   ├── assets/
+│   │   └── images/
+│   │       └── homepage.png
+│   │
 │   ├── components/
-│   ├── layouts/
 │   ├── pages/
+│   ├── layouts/
 │   ├── hooks/
-│   ├── services/
 │   ├── context/
-│   ├── utils/
+│   ├── services/
 │   ├── routes/
+│   ├── utils/
 │   ├── App.jsx
 │   └── main.jsx
 │
@@ -97,7 +115,7 @@ client-uptime-frontend/
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/client-uptime-frontend.git
+git clone https://github.com/jhachhotu/client-uptime-frontend.git
 
 cd client-uptime-frontend
 ```
@@ -124,7 +142,7 @@ VITE_GOOGLE_CLIENT_ID=your_google_client_id
 
 ---
 
-## Run Development Server
+## Start Development Server
 
 ```bash
 npm run dev
@@ -132,35 +150,37 @@ npm run dev
 
 The application will start at:
 
-```
+```text
 http://localhost:5173
 ```
 
-Vite provides an extremely fast development experience with instant Hot Module Replacement (HMR). :contentReference[oaicite:0]{index=0}
+Vite provides an extremely fast development experience with Hot Module Replacement (HMR), enabling instant updates while developing.
 
 ---
 
-# 📦 Build for Production
+# 📦 Production Build
+
+Build the project:
 
 ```bash
 npm run build
 ```
 
-Preview the production build:
+Preview the production build locally:
 
 ```bash
 npm run preview
 ```
 
-Vite generates an optimized production bundle suitable for deployment to static hosting providers like Vercel. :contentReference[oaicite:1]{index=1}
+The optimized production build is generated inside the **dist/** folder and is ready to deploy on platforms like Vercel, Netlify, Firebase Hosting, GitHub Pages, or AWS S3.
 
 ---
 
 # 🌐 Live Demo
 
-Frontend is deployed on **Vercel**
+The application is deployed on **Vercel**.
 
-**🔗 Live URL**
+### 🔗 Live Website
 
 https://client-uptime-frontend.vercel.app/
 
@@ -168,16 +188,16 @@ https://client-uptime-frontend.vercel.app/
 
 # 🎯 Core Features
 
-## Authentication
+## 🔐 Authentication
 
-- Google OAuth Login
+- Google OAuth2 Login
 - JWT Authentication
-- Protected Routes
 - Secure Session Management
+- Protected Routes
 
 ---
 
-## Monitoring Dashboard
+## 📊 Monitoring Dashboard
 
 - Website Monitoring
 - API Monitoring
@@ -189,52 +209,56 @@ https://client-uptime-frontend.vercel.app/
 
 ---
 
-## User Experience
+## 🎨 User Experience
 
 - Responsive Design
-- Fast Navigation
-- Modern UI Components
-- Smooth Animations
+- Smooth Navigation
+- Modern Components
+- Beautiful Animations
 - Mobile Friendly
 - Dark Theme
+- Fast Loading Pages
 
 ---
 
 # 🎨 UI Highlights
 
-- Clean and minimal interface
-- Beautiful hero section
-- Modern dashboard layout
-- Responsive navigation
-- Professional typography
-- Reusable React components
-- Optimized performance
+- Modern SaaS Landing Page
+- Beautiful Hero Section
+- Responsive Navigation Bar
+- Interactive Call-to-Action Buttons
+- Professional Typography
+- Reusable React Components
+- Optimized User Experience
+- Clean Dashboard Layout
 
 ---
 
 # ⚡ Performance
 
-- Fast page loading
-- Optimized asset bundling
-- Component-based architecture
-- Lazy loading support
-- Efficient API requests
-- Hot Module Replacement (HMR)
+- ⚡ Fast Page Loading
+- 🚀 Optimized Bundling with Vite
+- 📦 Component-Based Architecture
+- 🔄 Efficient REST API Calls
+- 💾 Lazy Loading Ready
+- 🔥 Hot Module Replacement (HMR)
 
 ---
 
 # 🔗 Backend Integration
 
-This frontend integrates with the **Sentinel Uptime Monitoring Backend**, built using:
+The frontend communicates with the **Sentinel Uptime Monitoring Backend**, which is built using:
 
 - Spring Boot
+- Spring Security
+- OAuth2 Authentication
+- JWT Authorization
 - Spring Cloud Gateway
 - Eureka Service Registry
-- Config Server
-- OAuth2 Authentication
-- JWT Security
+- Spring Cloud Config Server
 - Docker
 - Microservices Architecture
+- REST APIs
 
 ---
 
@@ -248,9 +272,9 @@ To deploy your own instance:
 npm run build
 ```
 
-Deploy the generated `dist/` folder to:
+Deploy the generated **dist/** folder to:
 
-- Vercel
+- ▲ Vercel
 - Netlify
 - Firebase Hosting
 - GitHub Pages
@@ -261,22 +285,23 @@ Deploy the generated `dist/` folder to:
 
 # 📈 Future Enhancements
 
-- Push Notifications
-- Email Alerts
-- SMS Notifications
-- Dark / Light Theme Toggle
-- Team Collaboration
-- Dashboard Analytics
-- WebSocket Real-Time Updates
-- Charts & Graphs
-- User Preferences
-- Multi-language Support
+- 📧 Email Notifications
+- 📱 Push Notifications
+- 📩 SMS Alerts
+- 🌙 Light/Dark Theme Toggle
+- 👥 Team Collaboration
+- 📊 Advanced Analytics Dashboard
+- 📈 Interactive Charts
+- 🔔 Real-time WebSocket Updates
+- 🌍 Multi-language Support
+- 👤 User Preferences
+- 📤 Export Monitoring Reports
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome!
+Contributions are always welcome!
 
 1. Fork the repository
 
@@ -292,7 +317,7 @@ git checkout -b feature/new-feature
 git commit -m "Add new feature"
 ```
 
-4. Push your branch
+4. Push your changes
 
 ```bash
 git push origin feature/new-feature
@@ -312,11 +337,14 @@ This project is licensed under the **MIT License**.
 
 **Chhotu Kumar**
 
-- GitHub: https://github.com/jhachhotu
-- LinkedIn: https://www.linkedin.com/in/kumarchhotu/
+🔗 **GitHub:** https://github.com/jhachhotu
+
+🔗 **LinkedIn:** https://www.linkedin.com/in/kumarchhotu/
 
 ---
 
 ## ⭐ Support
 
-If you found this project useful, consider giving it a **⭐ Star** on GitHub. It helps others discover the project and supports future development.
+If you found this project useful, please consider giving it a **⭐ Star** on GitHub. Your support helps improve the project and makes it easier for others to discover it.
+
+Happy Coding! 🚀
