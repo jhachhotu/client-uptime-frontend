@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { ArrowLeft, Clock, ShieldAlert, Activity, AlertCircle, CheckCircle2, Send, MessageCircle, User } from 'lucide-react';
+import { ArrowLeft, Clock, ShieldAlert, Activity, AlertCircle, CheckCircle2, Send, MessageCircle, User, LifeBuoy } from 'lucide-react';
 import { getMonitorById, getMonitorLogs, getComments, addComment } from '../services/monitorService';
 
 const IncidentDetails = () => {
@@ -95,8 +95,16 @@ const IncidentDetails = () => {
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-black truncate">{site.name || site.url}</h1>
               <p className="text-xs sm:text-sm opacity-80 mt-1 truncate">{site.url}</p>
             </div>
-            <div className={`flex-shrink-0 px-3 py-1.5 rounded-xl font-black text-xs sm:text-sm ${isUp ? 'bg-white text-emerald-600' : 'bg-white text-red-600'}`}>
-              {isUp ? '● OPERATIONAL' : '● DOWN'}
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                to={`/issues?websiteId=${id}&raise=true`}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white rounded-xl text-xs font-black transition-all border border-white/20 shadow-sm"
+              >
+                <LifeBuoy size={14} /> Raise Issue with Proof
+              </Link>
+              <div className={`flex-shrink-0 px-3 py-1.5 rounded-xl font-black text-xs sm:text-sm ${isUp ? 'bg-white text-emerald-600' : 'bg-white text-red-600'}`}>
+                {isUp ? '● OPERATIONAL' : '● DOWN'}
+              </div>
             </div>
           </div>
         </div>

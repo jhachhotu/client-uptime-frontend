@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import BusinessAnalytics from './pages/BusinessAnalytics';
 import IncidentDetails from './pages/IncidentDetails';
 import Incidents from './pages/Incidents';
+import Issues from './pages/Issues';
 import About from './pages/About';
 import Features from './pages/Features';
 import Pricing from './pages/Pricing';
@@ -108,6 +109,13 @@ function App() {
         <Route path="/incidents/:id" element={
           <PrivateRoute>
             <AppLayout><IncidentDetails /></AppLayout>
+          </PrivateRoute>
+        } />
+
+        {/* Issues & Proof Management */}
+        <Route path="/issues" element={
+          <PrivateRoute>
+            <AppLayout><Issues /></AppLayout>
           </PrivateRoute>
         } />
 

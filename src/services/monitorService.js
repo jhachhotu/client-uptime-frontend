@@ -109,3 +109,57 @@ export const addComment = async (id, message) => {
   if (!response.ok) throw new Error('Failed to add comment');
   return response.json();
 };
+
+// ─── Issue Reporting & AWS S3/Lambda Proof Management ───
+export const getIssues = async () => {
+  const response = await fetch(`${API_BASE_URL}/issues`, {
+    headers: authHeaders()
+  });
+  if (!response.ok) throw new Error('Failed to fetch issues');
+  return response.json();
+};
+
+export const getIssueById = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/issues/${id}`, {
+    headers: authHeaders()
+  });
+  if (!response.ok) throw new Error('Failed to fetch issue details');
+  return response.json();
+};
+
+export const createIssue = async (formData) => {
+  // Notice: For FormData, do NOT set 'Content-Type', browser sets multipart/form-data with boundary automatically
+  const headers = authHeaders();
+  const response = await fetch(`${API_BASE_URL}/issues`, {
+    method: 'POST',
+    headers,
+    body: formData
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || 'Failed to raise issue');
+  }
+  return response.json();
+};
+
+export const updateIssueStatus = async (id, status) => {
+  const response = await fetch(`${API_BASE_URL}/issues/${id}/status`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeaders()
+    },
+    body: JSON.stringify({ status })
+  });
+  if (!response.ok) throw new Error('Failed to update issue status');
+  return response.json();
+};
+
+export const deleteIssue = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/issues/${id}`, {
+    method: 'DELETE',
+    headers: authHeaders()
+  });
+  if (!response.ok) throw new Error('Failed to delete issue');
+  return response.json();
+};

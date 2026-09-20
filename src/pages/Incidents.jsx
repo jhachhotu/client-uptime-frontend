@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getMonitors } from '../services/monitorService';
-import { AlertCircle, CheckCircle2, XCircle, Clock, ArrowRight, Activity, Globe } from 'lucide-react';
+import { AlertCircle, CheckCircle2, XCircle, Clock, ArrowRight, Activity, Globe, LifeBuoy } from 'lucide-react';
 
 const Incidents = () => {
     const { isAuthenticated } = useAuth();
@@ -43,14 +43,22 @@ const Incidents = () => {
     return (
         <div>
             {/* Header */}
-            <header className="max-w-6xl mx-auto mb-8">
-                <div className="flex items-center gap-2 text-emerald-500 font-bold mb-1">
-                    <AlertCircle size={16} /> INCIDENT CENTER
+            <header className="max-w-6xl mx-auto mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <div className="flex items-center gap-2 text-emerald-500 font-bold mb-1">
+                        <AlertCircle size={16} /> INCIDENT CENTER
+                    </div>
+                    <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Incidents & Status</h1>
+                    <p className="text-slate-500 font-medium mt-1">
+                        Real-time health overview of all monitored services.
+                    </p>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Incidents & Status</h1>
-                <p className="text-slate-500 font-medium mt-1">
-                    Real-time health overview of all monitored services.
-                </p>
+                <Link
+                    to="/issues?raise=true"
+                    className="flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-all shadow-sm self-start sm:self-auto"
+                >
+                    <LifeBuoy size={16} className="text-emerald-400" /> Raise Issue with Proof
+                </Link>
             </header>
 
             {/* Stats Cards */}
