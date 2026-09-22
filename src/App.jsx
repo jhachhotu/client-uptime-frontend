@@ -18,6 +18,7 @@ import MonitorTypePage from './pages/MonitorTypePage';
 import ResourcePage from './pages/ResourcePage';
 import ToolPage from './pages/ToolPage';
 import Register from './pages/Register';
+import Billing from './pages/Billing';
 
 // Layout wrapper for authenticated pages
 const AppLayout = ({ children }) => (
@@ -116,6 +117,20 @@ function App() {
         <Route path="/issues" element={
           <PrivateRoute>
             <AppLayout><Issues /></AppLayout>
+          </PrivateRoute>
+        } />
+
+        {/* Billing & Subscriptions */}
+        <Route path="/billing" element={
+          <PrivateRoute>
+            <AppLayout><Billing /></AppLayout>
+          </PrivateRoute>
+        } />
+
+        {/* Settings -> points to Billing */}
+        <Route path="/settings" element={
+          <PrivateRoute>
+            <AppLayout><Billing /></AppLayout>
           </PrivateRoute>
         } />
 

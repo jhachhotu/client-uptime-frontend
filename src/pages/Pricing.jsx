@@ -1,20 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Check, X, Zap, ArrowRight, Star, Shield, Sparkles, Users, Clock, Globe } from 'lucide-react';
 import { Footer } from './About';
 import Navbar from '../components/Navbar';
+import { getSubscription, createCheckoutSession } from '../services/paymentService';
 
 const Pricing = () => {
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const [annual, setAnnual] = useState(false);
+    const [currentTier, setCurrentTier] = useState('STARTER');
+    const [loadingPlan, setLoadingPlan] = useState(null);
 
-    const handleLogin = () => {
+    useEffect(() => {
         if (isAuthenticated) {
-            navigate('/dashboard');
-        } else {
-            navigate('/login');
+            getSubscription()
+                .then(sub => {
+                    if (sub?.tier) setCurrentTier(sub.tier);
+                })
+                .catch(() => {});
+        }
+    }, [isAuthenticated]);
+
+    const handlePlanSelect = async (tierId) => {
+        if (!isAuthenticated) {
+            navigate('/register');
+            return;
+        }
+
+        if (tierId === currentTier) {
+            navigate('/billing');
+            return;
+        }
+
+        if (tierId === 'STARTER') {
+            navigate('/billing');
+            return;
+        }
+
+        try {
+            setLoadingPlan(tierId);
+            const cycle = annual ? 'ANNUAL' : 'MONTHLY';
+            const res = await createCheckoutSession({
+                tier: tierId,
+                billingCycle: cycle,
+                successUrl: `${window.location.origin}/billing?success=true&tier=${tierId}&cycle=${cycle}`,
+                cancelUrl: `${window.location.origin}/billing?canceled=true`
+            });
+            if (res.checkoutUrl) {
+                window.location.href = res.checkoutUrl;
+            } else {
+                navigate('/billing');
+            }
+        } catch (err) {
+            console.error("Checkout redirect error:", err);
+            navigate('/billing');
+        } finally {
+            setLoadingPlan(null);
         }
     };
 
@@ -66,8 +109,9 @@ const Pricing = () => {
                         desc="Perfect for personal projects and small apps."
                         price={0}
                         period={annual ? '/yr' : '/mo'}
-                        cta="Start Free"
-                        onClick={handleLogin}
+                        cta={isAuthenticated && currentTier === 'STARTER' ? 'Current Plan' : 'Start Free'}
+                        onClick={() => handlePlanSelect('STARTER')}
+                        isCurrent={isAuthenticated && currentTier === 'STARTER'}
                         features={[
                             { text: 'Up to 3 monitors', included: true },
                             { text: '5-minute check interval', included: true },
@@ -85,9 +129,16 @@ const Pricing = () => {
                         desc="For growing teams that need deeper insights."
                         price={annual ? 190 : 19}
                         period={annual ? '/yr' : '/mo'}
-                        cta="Start 14-Day Trial"
-                        onClick={handleLogin}
+                        cta={
+                            loadingPlan === 'PRO'
+                                ? 'Initiating...'
+                                : isAuthenticated && currentTier === 'PRO'
+                                ? 'Current Plan'
+                                : 'Upgrade to Pro'
+                        }
+                        onClick={() => handlePlanSelect('PRO')}
                         popular={true}
+                        isCurrent={isAuthenticated && currentTier === 'PRO'}
                         features={[
                             { text: 'Up to 25 monitors', included: true },
                             { text: '10-second check interval', included: true },
@@ -105,10 +156,17 @@ const Pricing = () => {
                         desc="For organizations with critical infrastructure."
                         price={annual ? 790 : 79}
                         period={annual ? '/yr' : '/mo'}
-                        cta="Contact Sales"
-                        onClick={() => window.location.href = '/contact'}
+                        cta={
+                            loadingPlan === 'ENTERPRISE'
+                                ? 'Initiating...'
+                                : isAuthenticated && currentTier === 'ENTERPRISE'
+                                ? 'Current Plan'
+                                : 'Upgrade to Enterprise'
+                        }
+                        onClick={() => handlePlanSelect('ENTERPRISE')}
+                        isCurrent={isAuthenticated && currentTier === 'ENTERPRISE'}
                         features={[
-                            { text: 'Unlimited monitors', included: true },
+                            { text: 'Unlimited monitors (1,000)', included: true },
                             { text: '5-second check interval', included: true },
                             { text: 'All alert channels', included: true },
                             { text: 'Advanced BI dashboard', included: true },
@@ -194,7 +252,7 @@ const Pricing = () => {
 };
 
 /* ───── Sub Components ───── */
-const PricingCard = ({ name, desc, price, period, cta, popular, features, onClick }) => (
+const PricingCard = ({ name, desc, price, period, cta, popular, features, onClick, isCurrent }) => (
     <div className={`relative rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 transition-all ${popular
         ? 'bg-gradient-to-b from-emerald-500 to-teal-600 text-white shadow-2xl shadow-emerald-500/20 md:scale-105 border-0'
         : 'bg-slate-900/60 backdrop-blur border border-slate-800 hover:border-slate-700'
@@ -213,9 +271,12 @@ const PricingCard = ({ name, desc, price, period, cta, popular, features, onClic
             <span className={`text-sm font-bold ml-1 ${popular ? 'text-emerald-200' : 'text-slate-500'}`}>{period}</span>
         </div>
         <button onClick={onClick}
-            className={`w-full text-center py-3 rounded-xl font-bold mb-6 sm:mb-8 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm ${popular
-                ? 'bg-white text-emerald-600 shadow-lg'
-                : 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
+            disabled={isCurrent}
+            className={`w-full text-center py-3 rounded-xl font-bold mb-6 sm:mb-8 transition-all text-sm ${isCurrent
+                ? 'bg-slate-800 text-slate-400 border border-slate-700 cursor-default'
+                : popular
+                ? 'bg-white text-emerald-600 shadow-lg hover:scale-[1.02] active:scale-[0.98]'
+                : 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 hover:scale-[1.02] active:scale-[0.98]'
                 }`}
         >{cta}</button>
         <div className="space-y-2.5 sm:space-y-3">

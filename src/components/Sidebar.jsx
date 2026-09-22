@@ -9,6 +9,7 @@ import {
   LogOut,
   ShieldCheck,
   Settings,
+  CreditCard,
   Menu,
   X,
   Home
@@ -24,7 +25,8 @@ const Sidebar = () => {
     { name: 'Analytics', path: '/analytics', icon: <BarChart3 size={20} /> },
     { name: 'Incidents', path: '/incidents', icon: <AlertCircle size={20} /> },
     { name: 'Issues', path: '/issues', icon: <LifeBuoy size={20} /> },
-    { name: 'Settings', path: '/settings', icon: <Settings size={20} /> },
+    { name: 'Billing', path: '/billing', icon: <CreditCard size={20} /> },
+    { name: 'Settings', path: '/billing', icon: <Settings size={20} /> },
   ];
 
   const handleLogout = () => {
