@@ -26,7 +26,7 @@ const Register = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`${API_BASE_URL}/api/monitoring/auth/register`, {
+            const response = await axios.post(`${API_BASE_URL}/auth/register`, {
                 email,
                 password
             });
@@ -44,7 +44,7 @@ const Register = () => {
 
     const handleGoogleSuccess = async (credentialResponse) => {
         try {
-            const response = await axios.post(`${API_BASE_URL}/api/monitoring/auth/google`, {
+            const response = await axios.post(`${API_BASE_URL}/auth/google`, {
                 idToken: credentialResponse.credential
             });
 

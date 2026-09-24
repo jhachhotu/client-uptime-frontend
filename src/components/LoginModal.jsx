@@ -23,7 +23,7 @@ const LoginModal = ({ isOpen, onClose, onRegisterClick }) => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`${API_BASE_URL}/api/monitoring/auth/login`, {
+            const response = await axios.post(`${API_BASE_URL}/auth/login`, {
                 email,
                 password
             });
@@ -41,7 +41,7 @@ const LoginModal = ({ isOpen, onClose, onRegisterClick }) => {
 
     const handleGoogleSuccess = async (credentialResponse) => {
         try {
-            const response = await axios.post(`${API_BASE_URL}/api/monitoring/auth/google`, {
+            const response = await axios.post(`${API_BASE_URL}/auth/google`, {
                 idToken: credentialResponse.credential
             });
 
